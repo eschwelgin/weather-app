@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather!</title>
+    <link rel="stylesheet" type="text/css" href="https://eschwelgin.github.io/cheatsheets/assets/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css" >
+  </head>
+<body>
+
+<div class="nav">
+    <h1>Current Weather</h1>
+    <div class="center">
+        <div class="search">
+            <input type="text" id="search0"></textarea>
+            <button id="search1">Search</button>
+        </div>
+    </div>
+    <button class="button" data="Cleveland">Cleveland</button>
+    <button class="button" data="asheville">Asheville</button>
+</div>
+
+<div id="container"></div>
+
+<div class="container">
+    <div id="fiveDayID" class="row"></div>
+</div>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="weather.js"></script>
+</body>
+</html>
