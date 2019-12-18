@@ -4,6 +4,7 @@ var currentdate = new Date();
 var datetime = (currentdate.getMonth()+1)  + "/" + currentdate.getDate() + "/"  + currentdate.getFullYear() 
 var city 
 var pullCity = [] //array to hold previously created buttons 
+var dateArray = []
 
 function bringData() {
     for (i = 0; i < 10; i++) {
@@ -50,6 +51,17 @@ $("#search1").on("click", function() { //event listener for search box
 
 });
 
+function buildArray(response) {
+    for (i=0; i<40; i++) {
+        timeOfDay = response.list[i].dt_txt
+        // console.log(timeOfDay)
+        if (timeOfDay.indexOf("12:00:00") !== -1) {
+            dateArray.push(i)
+        }
+    }
+    // console.log("date array = " + dateArray)
+}
+
 function fiveDay(city) {
     var fiveDayURL= 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + ',us&units=imperial&APPID=0fcca0a55f891165d74b5e83db80f1a4'
     $.ajax({
@@ -58,7 +70,8 @@ function fiveDay(city) {
       }).then(function(response) {
 
         console.log(response)
-        for ( i=1; i<6; i++ ) {
+        buildArray(response) // call our function to build an array consiting of weather for each future day at noon 
+        for ( i=dateArray[0]; i<=(dateArray[4]); i=i+8 ) { // use values from our array to set values for the loop - probably could have also used i=<dateArray[4]
             wrapper = $('<div class="col-sm">')
             wrapper.addClass("wrapper")
 
@@ -66,7 +79,7 @@ function fiveDay(city) {
             div.addClass("main")
 
             head = $("<h2>")
-            head.text(response.city.name + " " + (currentdate.getMonth()+1)  + "/" + (currentdate.getDate()+i))
+            head.text(response.city.name + " " + response.list[i].dt_txt.slice(5,10)) // slicing year and time off of our string before display
             div.append(head)
 
             img = $("<img>")
