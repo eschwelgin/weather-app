@@ -1,20 +1,36 @@
-// 0fcca0a55f891165d74b5e83db80f1a4
-//api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=0fcca0a55f891165d74b5e83db80f1a4
-//need current, 5-day, city history (add button) 
 // ideal startup would grap lat and long from browser and show local weather 
 
 var currentdate = new Date(); 
 var datetime = (currentdate.getMonth()+1)  + "/" + currentdate.getDate() + "/"  + currentdate.getFullYear() 
 var city 
+var pullCity = [] //array to hold previously created buttons 
 
-// $(document).on("load", function() {
-//     pullCity = localStorage.getItem(*) //probably just need a for loop 
-//     var newBtn = $("<button>")
-//     newBtn.attr("data", pullCity)
-//     newBtn.addClass("button")
-//     newBtn.text(pullCity)
-//     $(".nav").append(newBtn)
-// })
+function bringData() {
+    for (i = 0; i < 10; i++) {
+        if  (localStorage.getItem ("name" + [i]) !== null) { 
+            // console.log( [i] + "Contains Data")
+            pullCity[i] = localStorage.getItem("name" + [i])
+            console.log(pullCity[i])
+            var newBtn = $("<button>")
+            newBtn.attr("data", pullCity[i])
+            newBtn.addClass("button")
+            newBtn.text(pullCity[i])
+            $(".nav").append(newBtn)
+        }
+    }
+}
+$(document).on("load", bringData()) //import data from local storage 
+
+function appendData() { 
+    for (i=0; i < 10; i++) {
+        if  (localStorage.getItem ("name" + [i]) !== null) { 
+            // console.log( [i] + "Contains Data")
+        } else {
+            localStorage.setItem("name" + [i], city)
+            return
+        }
+    }
+}
 
 $(document).on("click", ".button", function() { // event listener for city buttons 
     var city = $(this).attr("data");
@@ -29,8 +45,9 @@ $("#search1").on("click", function() { //event listener for search box
     newBtn.addClass("button")
     newBtn.text(city)
     $(".nav").append(newBtn)
-    localStorage.setItem(city, city) // will have to rename variables
     createPage(city)
+    appendData(city)
+
 });
 
 function fiveDay(city) {
@@ -41,7 +58,7 @@ function fiveDay(city) {
       }).then(function(response) {
 
         console.log(response)
-        for ( i=0; i<5; i++ ) {
+        for ( i=1; i<6; i++ ) {
             wrapper = $('<div class="col-sm">')
             wrapper.addClass("wrapper")
 
