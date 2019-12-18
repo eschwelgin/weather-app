@@ -51,7 +51,7 @@ $("#search1").on("click", function() { //event listener for search box
 });
 
 function fiveDay(city) {
-    var fiveDayURL= 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',us&units=imperial&APPID=0fcca0a55f891165d74b5e83db80f1a4'
+    var fiveDayURL= 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + ',us&units=imperial&APPID=0fcca0a55f891165d74b5e83db80f1a4'
     $.ajax({
         url: fiveDayURL,
         method: "GET"
@@ -70,7 +70,7 @@ function fiveDay(city) {
             div.append(head)
 
             img = $("<img>")
-            var iconURL = "http://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + "@2x.png"
+            var iconURL = "https://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + "@2x.png"
             img.attr("src", iconURL)
             div.append(img)
 
@@ -102,7 +102,7 @@ function getUV() {
 
 function createPage(city) {
     // var city = "asheville"
-    var queryURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + ',us&units=imperial&APPID=0fcca0a55f891165d74b5e83db80f1a4'
+    var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + ',us&units=imperial&APPID=0fcca0a55f891165d74b5e83db80f1a4'
 
     $("#container").text("") // clear page
     $("#fiveDayID").text("")
@@ -124,7 +124,7 @@ function createPage(city) {
         div.append(head)
     
         img = $("<img>")
-        var iconURL = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png"
+        var iconURL = "https://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png"
         img.attr("src", iconURL)
         div.append(img)
     
@@ -147,7 +147,7 @@ function createPage(city) {
     
         lat = response.coord.lat
         lon = response.coord.lon
-        queryUVURL = 'http://api.openweathermap.org/data/2.5/uvi?APPID=0fcca0a55f891165d74b5e83db80f1a4&lat=' + lat + '&lon=' + lon
+        queryUVURL = 'https://api.openweathermap.org/data/2.5/uvi?APPID=0fcca0a55f891165d74b5e83db80f1a4&lat=' + lat + '&lon=' + lon
     
             getUV()
     
